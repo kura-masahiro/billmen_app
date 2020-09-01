@@ -13,6 +13,11 @@
 
  */
  @import "bootstrap";
+ .base-container {
+   @extend .container-fluid;
+   max-width: var(--breakpoint-lg);
+   padding: 30px 100px 100px 30px;
+ }
  th,
  td {
    vertical-align: middle !important;
