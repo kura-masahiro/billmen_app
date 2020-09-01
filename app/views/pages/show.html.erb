@@ -1,2 +1,4 @@
 <h1>こんにちは、<%= current_user.username %>さん</h1>
 <p>ユーザー様用ページです。</p>
+<%= link_to "記事を投稿する", new_post_path %>
+ <%= link_to "投稿一覧に戻る", posts_path %>
