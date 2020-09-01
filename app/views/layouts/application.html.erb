@@ -4,6 +4,7 @@
     <title>ビルメン共有アプリ</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -11,20 +12,14 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-dark" style="">
-        <% if user_signed_in? %>
-          <strong><%= link_to current_user.username, pages_show_path %></strong>
-          <%= link_to 'アカウント変更', edit_user_registration_path %>
-          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to 'アカウント登録', new_user_registration_path %>
-          <%= link_to 'ログイン', new_user_session_path %>
-        <% end %>
-     </nav>
+      <%= render "layouts/header" %>
    </header>
+   <main>
+   </main>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
-    <%= yield %>
+    <div class="base-container">
+     <%= yield %>
+    </div>
   </body>
 </html>
