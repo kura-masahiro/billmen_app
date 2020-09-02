@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy ]
 
   def index
      @posts = Post.order(id: :asc)
@@ -42,6 +42,11 @@ class PostsController < ApplicationController
     @post.destroy!
     redirect_to @post, alert: "削除しました"
   end
+  
+  def electric
+    
+  end
+
 
   private
 
