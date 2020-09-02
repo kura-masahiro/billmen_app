@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
- 
-   before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy ]
 
   def index
      @posts = Post.order(id: :asc)
@@ -43,6 +42,11 @@ class PostsController < ApplicationController
     @post.destroy!
     redirect_to @post, alert: "削除しました"
   end
+  
+  def electric
+    
+  end
+
 
   private
 
@@ -51,6 +55,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content).merge(user_id: current_user.id)
   end
 end

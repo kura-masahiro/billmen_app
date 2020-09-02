@@ -1,29 +1,10 @@
 <h1 class="text-center p-4">投稿一覧</h1>
-<table class="table table-bordered table-striped mt-5">
-  <thead class="table-primary">
-    <tr>
-      <th scope="col">No.</th>
-      <th scope="col" class="w-100">件名</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each.with_index(1) do |post, i| %>
-      <tr>
-        <th scope="row" class="text-right"><%= i %></th>
-        <td class="break-word"><%= post.title %></td>
-        <td class="text-nowrap">
-          <%= link_to post, class: "btn btn-primary" do %>
-            <i class="fas fa-envelope-open-text"></i> <span class="d-none d-md-inline"> 詳細</span>
-          <% end %>
-          <%= link_to edit_post_path(post), class: "btn btn-success" do %>
-            <i class="far fa-edit"></i> <span class="d-none d-md-inline"> 編集</span>
-          <% end %>
-          <%= link_to post, method: :delete, data: { confirm: "削除しますか?" }, class: "btn btn-danger" do %>
-            <i class="far fa-trash-alt"></i> <span class="d-none d-md-inline"> 削除</span>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div>
+<% Post.all.each_with_index do |post, i| %>
+  <p><%= i + 1 %>つ目</p>
+  <% user = User.find_by(id: post.user_id) %>
+   <p><%= user.username %></p>
+   <p><%= post.title %></p>
+   <p><%= post.content %></p>
+<% end %>
+</div>
