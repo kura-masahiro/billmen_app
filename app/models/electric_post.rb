@@ -1,0 +1,2 @@
+class ElectricPost < ApplicationRecord
+end

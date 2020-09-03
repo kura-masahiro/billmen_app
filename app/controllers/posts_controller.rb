@@ -1,13 +1,17 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy ]
+  # before_action :set_post, only: %i[show edit update destroy ]
 
   def index
      @posts = Post.order(id: :asc)
   end
 
-  def show
+  def electric
 
   end
+
+  # def show
+    # @post = Post.find(params[:id])
+  # end
 
   def new
     @post = Post.new
@@ -25,12 +29,14 @@ class PostsController < ApplicationController
 
 
   def edit
+    @post = Post.find(params[:id])
 
   end
 
   def update
-    if @post.update(post_params)
-      redirect_to @post, notice: "更新しました"
+     post = Post.find(params[:id])
+    if post.update(post_params)
+      redirect_to post, notice: "更新しました"
     else
       flash.now[:alert] = "更新に失敗しました"
       render :edit
@@ -39,20 +45,17 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy!
-    redirect_to @post, alert: "削除しました"
+     post = Post.find(params[:id])
+     post.destroy!
+    redirect_to post, alert: "削除しました"
   end
   
-  def electric
-    
-  end
-
 
   private
 
-  def set_post
-    @post = Post.find(params[:id])
-  end
+  # def set_post
+  #   @post = Post.find(params[:id])
+  # end
 
   def post_params
     params.require(:post).permit(:title, :content).merge(user_id: current_user.id)
