@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    
   end
 
   def new
@@ -29,13 +29,13 @@ class PostsController < ApplicationController
 
 
   def edit
-    @post = Post.find(params[:id])
+    
   end
 
   def update
-     post = Post.find(params[:id])
-    if post.update(post_params)
-      redirect_to post, notice: "更新しました"
+    
+    if @post.update(post_params)
+      redirect_to @post, notice: "更新しました"
     else
       flash.now[:alert] = "更新に失敗しました"
       render :edit
@@ -44,9 +44,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-     post = Post.find(params[:id])
-     post.destroy!
-    redirect_to post, alert: "削除しました"
+     @post.destroy!
+    redirect_to @post, alert: "削除しました"
   end
   
 

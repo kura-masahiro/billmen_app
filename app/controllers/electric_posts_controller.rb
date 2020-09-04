@@ -13,8 +13,13 @@ class ElectricPostsController < ApplicationController
   end
 
   def create
-    electric_post = ElectricPost.create!(electric_post_params)
-    redirect_to electric_post, notice: "投稿しました"
+    @electric_post = ElectricPost.new(electric_post_params)
+    if @electric_post.save
+      redirect_to @electric_post, notice: "投稿しました"
+    else
+      flash.now[:alert] = "投稿に失敗しました"
+      render :new
+    end
   end
 
   def edit
@@ -22,8 +27,12 @@ class ElectricPostsController < ApplicationController
   end
 
   def update
-    @electric_post.update!(electric_post_params)
-    redirect_to @electric_post, notice: "更新しました"
+    if @electric_post.update(electric_post_params)
+      redirect_to @electric_post, notice: "更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit
+    end
   end
 
   def destroy
