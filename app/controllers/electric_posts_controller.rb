@@ -14,7 +14,7 @@ class ElectricPostsController < ApplicationController
 
   def create
     electric_post = ElectricPost.create!(electric_post_params)
-    redirect_to electric_post
+    redirect_to electric_post, notice: "投稿しました"
   end
 
   def edit
@@ -23,12 +23,12 @@ class ElectricPostsController < ApplicationController
 
   def update
     @electric_post.update!(electric_post_params)
-    redirect_to @electric_post
+    redirect_to @electric_post, notice: "更新しました"
   end
 
   def destroy
     @electric_post.destroy!
-    redirect_to @electric_post
+    redirect_to @electric_post, alert: "削除しました"
   end
 
   private
