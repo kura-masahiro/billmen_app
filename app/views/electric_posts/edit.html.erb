@@ -1,14 +1,4 @@
-<h1>編集</h1>
-<%= form_with model: @electric_post, local: true do |form| %>
-  <div>
-    <%= form.label :title, "タイトル" %>
-    <%= form.text_field :title %>
-  </div>
-  <div>
-    <%= form.label :content, "内容" %>
-    <%= form.text_field :content %>
-  </div>
-  <div>
-    <%= form.submit "送信" %>
-  </div>
-<% end %>
+<div class="container p-4 my-5">
+<h1 class="text-center">第二種電気工事士記事編集欄</h1>
+<%= render "form", button_value: "編集完了"%>
+</div>
