@@ -1,0 +1,2 @@
+module DangerPostsHelper
+end

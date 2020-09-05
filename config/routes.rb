@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'danger_posts/index'
+  get 'danger_posts/show'
+  get 'danger_posts/new'
+  get 'danger_posts/create'
+  get 'danger_posts/edit'
+  get 'danger_posts/update'
+  get 'danger_posts/destroy'
   devise_for :users
   root 'pages#index'
   resources :posts
