@@ -1,5 +1,7 @@
 class ElectricPostsController < ApplicationController
    before_action :set_electric_post, only: %i[show edit update destroy]
+   before_action :authenticate_user!, except: :index
+
   def index
     @electric_posts = ElectricPost.order(id: :asc)
   end
@@ -47,7 +49,7 @@ class ElectricPostsController < ApplicationController
   end
 
   def electric_post_params
-    params.require(:electric_post).permit(:title, :content)
+    params.require(:electric_post).permit(:title, :content).merge(user_id: current_user.id)
   end
 
 end

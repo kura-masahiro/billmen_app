@@ -1,25 +1,17 @@
+<div class="text-center">
 <h1>第二種電気工事士投稿一覧</h1>
-<table>
-  <thead>
-    <tr>
-      <th scope="col">No.</th>
-      <th scope="col">件名</th>
-      <th scope="col">内容</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @electric_posts.each.with_index(1) do |electric_post, i| %>
-      <tr>
-        <th scope="row"><%= i %></th>
-        <td><%= electric_post.title %></td>
-        <td><%= electric_post.content %></td>
-        <td>
-          <%= link_to "詳細", electric_post %>
-          <%= link_to "編集", edit_electric_post_path(electric_post) %>
-          <%= link_to "削除", electric_post, method: :delete, data: { confirm: "削除しますか?" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to "第二種電気工事士新規投稿", new_electric_post_path %>
+<% ElectricPost.all.each_with_index do |electric_post, i| %>
+  <p><%= i + 1 %>件目</p>
+  <% user = User.find_by(id: electric_post.user_id) %>
+   <p>ユーザー名： <%= user.username %></p>
+   <p>件名： <%= electric_post.title %></p>
+   <p>内容： <%= electric_post.content %></p>
+   <td><%= link_to "詳細", electric_post %>
+</td>
+<%= link_to "編集", edit_electric_post_path(id: electric_post) %>
+<%= link_to "削除", electric_post_path(id: electric_post), method: :delete, data: { confirm: "削除しますか?" } %>
+<% end %>
+
+<br>
+<%= link_to "記事を投稿する", new_electric_post_path %>
+</div>

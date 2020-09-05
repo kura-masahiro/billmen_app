@@ -5,10 +5,6 @@ class PostsController < ApplicationController
      @posts = Post.order(id: :asc)
   end
 
-  def electric
-
-  end
-
   def show
     
   end
