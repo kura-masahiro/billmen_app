@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_05_085231) do
+ActiveRecord::Schema.define(version: 2020_09_05_115116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 2020_09_05_085231) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_boil_posts_on_user_id"
+  end
+
+  create_table "danger_posts", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_danger_posts_on_user_id"
   end
 
   create_table "electric_posts", force: :cascade do |t|
@@ -80,6 +89,7 @@ ActiveRecord::Schema.define(version: 2020_09_05_085231) do
   end
 
   add_foreign_key "boil_posts", "users"
+  add_foreign_key "danger_posts", "users"
   add_foreign_key "electric_posts", "users"
   add_foreign_key "freeze_posts", "users"
   add_foreign_key "posts", "users"
