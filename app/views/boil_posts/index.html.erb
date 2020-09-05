@@ -1,17 +1,17 @@
 <div class="text-center">
-<h1>第二種電気工事士投稿一覧</h1>
-<% ElectricPost.all.each_with_index do |electric_post, i| %>
+<h1>二級ボイラー技士投稿一覧</h1>
+<% BoilPost.all.each_with_index do |boil_post, i| %>
   <p><%= i + 1 %>件目</p>
-  <% user = User.find_by(id: electric_post.user_id) %>
+  <% user = User.find_by(id: boil_post.user_id) %>
    <p>ユーザー名： <%= user.username %></p>
-   <p>件名： <%= electric_post.title %></p>
-   <p>内容： <%= electric_post.content %></p>
-   <td><%= link_to "詳細", electric_post %>
+   <p>件名： <%= boil_post.title %></p>
+   <p>内容： <%= boil_post.content %></p>
+   <td><%= link_to "詳細", boil_post %>
 </td>
-<%= link_to "編集", edit_electric_post_path(id: electric_post) %>
-<%= link_to "削除", electric_post_path(id: electric_post), method: :delete, data: { confirm: "削除しますか?" } %>
+<%= link_to "編集", edit_boil_post_path(id: boil_post) %>
+<%= link_to "削除", boil_post_path(id: boil_post), method: :delete, data: { confirm: "削除しますか?" } %>
 <% end %>
 
 <br>
-<%= link_to "記事を投稿する", new_electric_post_path %>
+<%= link_to "記事を投稿する", new_boil_post_path %>
 </div>
