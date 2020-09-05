@@ -1,0 +1,2 @@
+module FreezePostsHelper
+end

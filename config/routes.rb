@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :posts
   resources :electric_posts
   resources :boil_posts
+  resources :freeze_posts
   get 'pages/show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
