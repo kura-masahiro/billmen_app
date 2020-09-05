@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'freeze_posts/index'
+  get 'freeze_posts/show'
+  get 'freeze_posts/new'
+  get 'freeze_posts/create'
+  get 'freeze_posts/edit'
+  get 'freeze_posts/update'
+  get 'freeze_posts/destroy'
   devise_for :users
   root 'pages#index'
   resources :posts
