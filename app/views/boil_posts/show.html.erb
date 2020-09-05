@@ -1,2 +1,7 @@
-<h1>BoilPosts#show</h1>
-<p>Find me in app/views/boil_posts/show.html.erb</p>
+<div class="text-center">
+<h1>第二種電気工事士記事詳細</h1>
+<% user = User.find_by(id: @electric_post) %>
+<p>タイトル： <%= @electric_post.title %></p>
+<p>内容： <%= @electric_post.content %></p>
+<%= link_to "投稿一覧に戻る", electric_posts_path %>
+</div>
