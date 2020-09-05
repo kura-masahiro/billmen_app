@@ -1,2 +1,7 @@
-<h1>FreezePosts#show</h1>
-<p>Find me in app/views/freeze_posts/show.html.erb</p>
+<div class="text-center p-4 my-5">
+<h1>第三種冷凍機械責任者記事詳細</h1>
+<% user = User.find_by(id: @freeze_post) %>
+<p>タイトル： <%= @freeze_post.title %></p>
+<p>内容： <%= @freeze_post.content %></p>
+<h2 class="container p-5 my-5"><%= link_to "投稿一覧に戻る", freeze_posts_path %></h2>
+</div>
