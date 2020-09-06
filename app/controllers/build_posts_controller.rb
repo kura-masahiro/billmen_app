@@ -15,7 +15,7 @@ before_action :set_build_post, only: %i[show edit update destroy]
   end
 
   def create
-    @build_post = buidlPost.new(build_post_params)
+    @build_post = BuildPost.new(build_post_params)
     if @build_post.save
       redirect_to @build_post, notice: "投稿しました"
     else
