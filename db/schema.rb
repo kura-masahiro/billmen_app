@@ -60,16 +60,6 @@ ActiveRecord::Schema.define(version: 2020_09_06_005828) do
     t.index ["user_id"], name: "index_freeze_posts_on_user_id"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.integer "post_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "email", default: "", null: false
@@ -102,5 +92,4 @@ ActiveRecord::Schema.define(version: 2020_09_06_005828) do
   add_foreign_key "danger_posts", "users"
   add_foreign_key "electric_posts", "users"
   add_foreign_key "freeze_posts", "users"
-  add_foreign_key "posts", "users"
 end
