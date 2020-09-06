@@ -1,4 +1,6 @@
 <div class="text-center p-4 my-5">
  <h1>第三種冷凍機械責任者記事編集欄</h1>
- <%= render "form", button_value: "編集完了"%>
+ <%= form_with model: @freeze_post, local: true do |f| %>
+ <%= render "/layouts/form",  f: f , button_value: "編集完了"%>
+ <% end %>
 </div>
