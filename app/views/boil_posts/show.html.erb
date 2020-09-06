@@ -2,7 +2,7 @@
   <h1>二級ボイラー技士記事詳細</h1>
   <% user = User.find_by(id: @boil_post) %>
   <p>件名： <%= @boil_post.title %></p>
-  <p>内容： <%= @boil_post.content %></p>
+  <p>内容： <%= simple_format(@boil_post.content) %></p>
 </div>
 <h2 class="text-center">
  <%= link_to "投稿一覧に戻る", boil_posts_path, class: "btn outline btn-primary" %>

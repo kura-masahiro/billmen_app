@@ -5,7 +5,7 @@
   <% user = User.find_by(id: freeze_post.user_id) %>
    <p>ユーザー名： <%= user.username %></p>
    <p>件名： <%= freeze_post.title %></p>
-   <p>内容： <%= freeze_post.content %></p>
+   <p>内容： <%= simple_format(freeze_post.content) %></p>
    <%= link_to "詳細", freeze_post %>
    <%= link_to "編集", edit_freeze_post_path(id: freeze_post) %>
    <%= link_to "削除", freeze_post_path(id: freeze_post), method: :delete, data: { confirm: "削除しますか?" } %>
