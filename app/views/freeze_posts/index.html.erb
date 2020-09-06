@@ -1,17 +1,16 @@
 <div class="text-center p-4 my-5">
-<h1>第三種冷凍機械責任者投稿一覧</h1>
-<% FreezePost.all.each_with_index do |freeze_post, i| %>
+  <h1>第三種冷凍機械責任者投稿一覧</h1>
+  <% FreezePost.all.each_with_index do |freeze_post, i| %>
   <p><%= i + 1 %>件目</p>
   <% user = User.find_by(id: freeze_post.user_id) %>
    <p>ユーザー名： <%= user.username %></p>
    <p>件名： <%= freeze_post.title %></p>
    <p>内容： <%= freeze_post.content %></p>
-   <td><%= link_to "詳細", freeze_post %>
-</td>
-<%= link_to "編集", edit_freeze_post_path(id: freeze_post) %>
-<%= link_to "削除", freeze_post_path(id: freeze_post), method: :delete, data: { confirm: "削除しますか?" } %>
-<% end %>
-
-<br>
-<h2 class="container p-5 my-5"><%= link_to "記事を投稿する", new_freeze_post_path %></h2>
+   <%= link_to "詳細", freeze_post %>
+   <%= link_to "編集", edit_freeze_post_path(id: freeze_post) %>
+   <%= link_to "削除", freeze_post_path(id: freeze_post), method: :delete, data: { confirm: "削除しますか?" } %>
+  <% end %>
+</div>
+<div class="text-center">
+  <%= link_to "記事を投稿する", new_freeze_post_path, class: "btn outline btn-primary" %>
 </div>
