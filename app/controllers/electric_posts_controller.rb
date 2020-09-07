@@ -3,6 +3,8 @@ class ElectricPostsController < ApplicationController
    before_action :authenticate_user!, except: :index
 
   def index
+    @search = ElectricPost.ransack(params[:q])
+    @results = @search.result
     @electric_posts = ElectricPost.order(id: :asc)
   end
 

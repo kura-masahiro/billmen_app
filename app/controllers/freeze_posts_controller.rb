@@ -3,6 +3,8 @@ class FreezePostsController < ApplicationController
    before_action :authenticate_user!, except: :index
 
   def index
+    @search = FreezePost.ransack(params[:q])
+    @results = @search.result
     @freeze_posts = FreezePost.order(id: :asc)
   end
 

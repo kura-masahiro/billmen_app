@@ -3,6 +3,8 @@ before_action :set_build_post, only: %i[show edit update destroy]
    before_action :authenticate_user!, except: :index
 
   def index
+    @search = BuildPost.ransack(params[:q])
+    @results = @search.result
     @build_posts = BuildPost.order(id: :asc)
   end
 
