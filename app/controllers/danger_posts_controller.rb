@@ -3,6 +3,8 @@ class DangerPostsController < ApplicationController
    before_action :authenticate_user!, except: :index
 
   def index
+    @search = DangerPost.ransack(params[:q])
+    @results = @search.result
     @danger_posts = DangerPost.order(id: :asc)
   end
 

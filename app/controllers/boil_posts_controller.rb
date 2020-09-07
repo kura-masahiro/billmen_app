@@ -3,6 +3,8 @@ class BoilPostsController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
+    @search = BoilPost.ransack(params[:q])
+    @results = @search.result
     @boil_posts = BoilPost.order(id: :asc)
   end
 
