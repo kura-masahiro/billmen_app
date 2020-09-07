@@ -13,6 +13,11 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
+  <div class="field">
+  <%= f.label :image, "プロフィール画像" %><br />
+  <%= f.file_field :image %>
+  </div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
@@ -39,6 +44,7 @@
   <div class="actions">
     <%= f.submit "パスワード更新" %>
   </div>
+
 <% end %>
 
 <h3>アカウントを削除する</h3>
