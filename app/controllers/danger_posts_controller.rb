@@ -4,7 +4,7 @@ class DangerPostsController < ApplicationController
 
   def index
     @search = DangerPost.ransack(params[:q])
-    @results = @search.result  if @search.present?
+    @results = @search.result if @search.present?
     @danger_posts = DangerPost.order(id: :asc)
   end
 
