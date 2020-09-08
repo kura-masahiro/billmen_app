@@ -4,7 +4,7 @@ class BoilPostsController < ApplicationController
 
   def index
     @search = BoilPost.ransack(params[:q])
-    @results = @search.result
+    @results = @search.result if @search.present?
     @boil_posts = BoilPost.order(id: :asc)
   end
 

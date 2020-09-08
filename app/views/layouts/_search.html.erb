@@ -1,4 +1,5 @@
-<%= search_form_for @search do |f| %>
+<% if @search.present? %>
+  <%= search_form_for @search do |f| %>
     <%= f.label :title, "件名" %>
     <%= f.search_field :title_cont %>
 
@@ -6,9 +7,8 @@
     <%= f.search_field :content_cont %>
     <div class="actions"><%= f.submit "検索" %></div>
     <% end %>
-    <% if @results.any? %>
     <% @results.each do |result| %>
       <p>件名： <%= result.title %></p>
       <p>内容：<%= simple_format(result.content) %></p>
     <% end %>
-  <% end %>
+ <% end %>

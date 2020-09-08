@@ -4,7 +4,7 @@ class FreezePostsController < ApplicationController
 
   def index
     @search = FreezePost.ransack(params[:q])
-    @results = @search.result
+    @results = @search.result  if @search.present?
     @freeze_posts = FreezePost.order(id: :asc)
   end
 
