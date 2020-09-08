@@ -4,7 +4,7 @@ before_action :set_build_post, only: %i[show edit update destroy]
 
   def index
     @search = BuildPost.ransack(params[:q])
-    @results = @search.result
+    @results = @search.result  if @search.present?
     @build_posts = BuildPost.order(id: :asc)
   end
 
