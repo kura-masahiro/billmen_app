@@ -4,7 +4,7 @@ class ElectricPostsController < ApplicationController
 
   def index
     @search = ElectricPost.ransack(params[:q])
-    @results = @search.result  if @search.present?
+    @results = @search.result if @search.present?
     @electric_posts = ElectricPost.order(id: :asc)
   end
 
