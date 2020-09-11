@@ -13,6 +13,8 @@
 
  */
  @import "bootstrap";
+ @import 'font-awesome-sprockets';
+ @import 'font-awesome';
  .base-container {
    @extend .container-fluid;
    max-width: var(--breakpoint-lg);
@@ -32,4 +34,19 @@
    height: 200px;
    border-radius: 100px;
    object-fit: cover;
+ }
+ .like-btn {
+   width: 25px;
+   height: 30px;
+   font-size: 25px;
+   color: #808080;
+   margin-left: 20px;
+ }
+
+ .unlike-btn {
+   width: 25px;
+   height: 30px;
+   font-size: 25px;
+   color: #e54747;
+   margin-left: 20px;
  }
