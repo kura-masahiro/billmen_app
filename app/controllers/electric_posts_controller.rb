@@ -9,7 +9,7 @@ class ElectricPostsController < ApplicationController
   end
 
   def show
-
+    @likes_count = Like.where(electric_post_id: @electric_post.id).count
   end
 
   def new
@@ -44,6 +44,20 @@ class ElectricPostsController < ApplicationController
     redirect_to @electric_post, alert: "削除しました"
   end
 
+  def like_create
+    @like = current_user.likes.new(user_id: current_user.id, electric_post_id: params[:electric_post_id])
+    if @like.save!
+      redirect_to @electric_post
+    end
+  end
+
+  def like_destroy
+    @like = Like.find_by(user_id: current_user.id, electric_post_id: params[:electric_post_id]) 
+    if @like.destroy
+      redirect_to @electric_post, alert: "削除しました"
+    end
+  end
+
   private
 
   def set_electric_post
@@ -51,7 +65,7 @@ class ElectricPostsController < ApplicationController
   end
 
   def electric_post_params
-    params.require(:electric_post).permit(:title, :content).merge(user_id: current_user.id)
+    params.require(:electric_post).permit(:title, :content, :user_id, :like).merge(user_id: current_user.id)
   end
 
 end

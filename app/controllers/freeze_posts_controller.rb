@@ -44,6 +44,24 @@ class FreezePostsController < ApplicationController
     redirect_to @freeze_post, alert: "削除しました"
   end
 
+#   def like_create
+#    @like = current_user.likes.new(electric_post_id: params[:electric_post_id], 
+#     boil_post_id: params[:boil_post_id], freeze_post_id: params[:freeze_post_id], danger_post_id: params[:danger_post_id], build_post_id: params[:build_post_id])
+#    if @like.save
+#      redirect_to "/pages/show"
+#    end
+#  end
+#  def destroy
+#    @like = Like.find_by(user_id: current_user.id, electric_post_id: params[:electric_post_id], 
+#     boil_post_id: params[:boil_post_id], freeze_post_id: params[:freeze_post_id], danger_post_id: params[:danger_post_id], build_post_id: params[:build_post_id])
+#    if @like.destroy
+#      redirect_to "/pages/show"
+#    end
+#  end
+# ​
+# end
+
+
   private
 
   def set_freeze_post

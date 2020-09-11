@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  electric_post: one
+  boil_post: one
+  freeze_post: one
+  build_post: one
+  danger_post: one
+  user: one
+
+two:
+  electric_post: two
+  boil_post: two
+  freeze_post: two
+  build_post: two
+  danger_post: two
+  user: two
