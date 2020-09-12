@@ -45,18 +45,23 @@ before_action :set_build_post, only: %i[show edit update destroy like_create lik
   end
 
   def like_create
-    @like = current_user.likes.new(build_post_id: params[:id])
-    if @like.save!
-      redirect_to @build_post
+    if @build_post.user_id != current_user.id
+      @like = current_user.likes.new(build_post_id: params[:id])
+      if @like.save!
+        redirect_to @build_post
+      end
     end
   end
 
   def like_destroy
-    @like = Like.find_by(build_post_id: params[:id]) 
-    if @like.destroy
-      redirect_to @build_post
+    if @build_post.user_id != current_user.id
+      @like = Like.find_by(build_post_id: params[:id]) 
+      if @like.destroy
+        redirect_to @build_post
+      end
     end
   end
+
 
   private
 
