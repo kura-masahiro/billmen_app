@@ -1,5 +1,5 @@
 class BoilPostsController < ApplicationController
-  before_action :set_boil_post, only: %i[show edit update destroy]
+  before_action :set_boil_post, only: %i[show edit update destroy like_create like_destroy]
   before_action :authenticate_user!, except: :index
 
   def index
@@ -9,7 +9,7 @@ class BoilPostsController < ApplicationController
   end
 
   def show
-
+      @likes_count = Like.where(boil_post_id: @boil_post.id).count
   end
 
   def new
@@ -44,6 +44,20 @@ class BoilPostsController < ApplicationController
     redirect_to @boil_post, alert: "削除しました"
   end
 
+  def like_create
+    @like = current_user.likes.new(boil_post_id: params[:id])
+    if @like.save!
+      redirect_to @boil_post
+    end
+  end
+
+  def like_destroy
+    @like = Like.find_by(boil_post_id: params[:id]) 
+    if @like.destroy
+      redirect_to @boil_post
+    end
+  end
+
   private
 
   def set_boil_post
@@ -51,7 +65,7 @@ class BoilPostsController < ApplicationController
   end
 
   def boil_post_params
-    params.require(:boil_post).permit(:title, :content).merge(user_id: current_user.id)
+    params.require(:boil_post).permit(:title, :content, :user_id, :like).merge(user_id: current_user.id)
   end
 
 end

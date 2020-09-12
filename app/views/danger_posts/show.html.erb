@@ -3,6 +3,17 @@
   <% user = User.find_by(id: @danger_post) %>
   <p>件名： <%= @danger_post.title %></p>
   <p>内容： <%= simple_format(@danger_post.content) %></p>
+  <% if current_user.likes.find_by(danger_post_id: @danger_post.id) %>
+   <%= link_to like_destroy_danger_post_path(@danger_post), class: "likeIcon", method: :delete do %>
+      <i class="fas fa-heart unlike-btn"></i>
+     <%= @likes_count %>
+     <% end %>
+  <% else %>
+   <%= link_to like_create_danger_post_path(@danger_post), class: "likeNo", method: :post do %>
+     <i class="far fa-heart like-btn" ></i>
+     <%= @likes_count %>
+ <% end %>
+ <% end %>
 </div>
 <h2 class="text-center">
  <%= link_to "投稿一覧に戻る", danger_posts_path, class: "btn outline btn-primary" %>
