@@ -45,19 +45,24 @@ class ElectricPostsController < ApplicationController
   end
 
   def like_create
-    @like = current_user.likes.new(electric_post_id: params[:id])
-    if @like.save!
-      redirect_to @electric_post
+    if @electric_post.user_id != current_user.id
+      @like = current_user.likes.new(electric_post_id: params[:id])
+      if @like.save!
+        redirect_to @electric_post
+      end
     end
   end
 
   def like_destroy
-    @like = Like.find_by(electric_post_id: params[:id]) 
-    if @like.destroy
-      redirect_to @electric_post
+    if @electric_post.user_id != current_user.id
+      @like = Like.find_by(electric_post_id: params[:id]) 
+      if @like.destroy
+        redirect_to @electric_post
+      end
     end
   end
 
+  
   private
 
   def set_electric_post

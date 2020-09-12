@@ -45,18 +45,23 @@ class DangerPostsController < ApplicationController
   end
 
    def like_create
-    @like = current_user.likes.new(danger_post_id: params[:id])
-    if @like.save!
-      redirect_to @danger_post
+     if @danger_post.user_id != current_user.id
+      @like = current_user.likes.new(danger_post_id: params[:id])
+      if @like.save!
+        redirect_to @danger_post
+      end
+     end
+   end
+
+  def like_destroy
+    if @danger_post.user_id != current_user.id
+      @like = Like.find_by(danger_post_id: params[:id]) 
+      if @like.destroy
+        redirect_to @danger_post
+      end
     end
   end
 
-  def like_destroy
-    @like = Like.find_by(danger_post_id: params[:id]) 
-    if @like.destroy
-      redirect_to @danger_post
-    end
-  end
 
   private
 
