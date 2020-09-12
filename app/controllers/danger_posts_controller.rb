@@ -1,5 +1,5 @@
 class DangerPostsController < ApplicationController
-   before_action :set_danger_post, only: %i[show edit update destroy]
+   before_action :set_danger_post, only: %i[show edit update destroy like_create like_destroy]
    before_action :authenticate_user!, except: :index
 
   def index
@@ -9,7 +9,7 @@ class DangerPostsController < ApplicationController
   end
 
   def show
-
+      @likes_count = Like.where(danger_post_id: @danger_post.id).count
   end
 
   def new
@@ -44,6 +44,20 @@ class DangerPostsController < ApplicationController
     redirect_to @danger_post, alert: "削除しました"
   end
 
+   def like_create
+    @like = current_user.likes.new(danger_post_id: params[:id])
+    if @like.save!
+      redirect_to @danger_post
+    end
+  end
+
+  def like_destroy
+    @like = Like.find_by(danger_post_id: params[:id]) 
+    if @like.destroy
+      redirect_to @danger_post
+    end
+  end
+
   private
 
   def set_danger_post
@@ -51,7 +65,7 @@ class DangerPostsController < ApplicationController
   end
 
   def danger_post_params
-    params.require(:danger_post).permit(:title, :content).merge(user_id: current_user.id)
+    params.require(:danger_post).permit(:title, :content, :user_id, :like).merge(user_id: current_user.id)
   end
 
 end

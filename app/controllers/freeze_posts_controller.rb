@@ -1,5 +1,5 @@
 class FreezePostsController < ApplicationController
-   before_action :set_freeze_post, only: %i[show edit update destroy]
+   before_action :set_freeze_post, only: %i[show edit update destroy like_create like_destroy]
    before_action :authenticate_user!, except: :index
 
   def index
@@ -9,7 +9,7 @@ class FreezePostsController < ApplicationController
   end
 
   def show
-
+     @likes_count = Like.where(freeze_post_id: @freeze_post.id).count
   end
 
   def new
@@ -44,22 +44,19 @@ class FreezePostsController < ApplicationController
     redirect_to @freeze_post, alert: "削除しました"
   end
 
-#   def like_create
-#    @like = current_user.likes.new(electric_post_id: params[:electric_post_id], 
-#     boil_post_id: params[:boil_post_id], freeze_post_id: params[:freeze_post_id], danger_post_id: params[:danger_post_id], build_post_id: params[:build_post_id])
-#    if @like.save
-#      redirect_to "/pages/show"
-#    end
-#  end
-#  def destroy
-#    @like = Like.find_by(user_id: current_user.id, electric_post_id: params[:electric_post_id], 
-#     boil_post_id: params[:boil_post_id], freeze_post_id: params[:freeze_post_id], danger_post_id: params[:danger_post_id], build_post_id: params[:build_post_id])
-#    if @like.destroy
-#      redirect_to "/pages/show"
-#    end
-#  end
-# ​
-# end
+   def like_create
+    @like = current_user.likes.new(freeze_post_id: params[:id])
+    if @like.save!
+      redirect_to @freeze_post
+    end
+  end
+
+  def like_destroy
+    @like = Like.find_by(freeze_post_id: params[:id]) 
+    if @like.destroy
+      redirect_to @freeze_post
+    end
+  end
 
 
   private
@@ -69,7 +66,7 @@ class FreezePostsController < ApplicationController
   end
 
   def freeze_post_params
-    params.require(:freeze_post).permit(:title, :content).merge(user_id: current_user.id)
+    params.require(:freeze_post).permit(:title, :content, :user_id, :like).merge(user_id: current_user.id)
   end
 
 end

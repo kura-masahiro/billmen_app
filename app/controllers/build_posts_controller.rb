@@ -1,5 +1,5 @@
 class BuildPostsController < ApplicationController
-before_action :set_build_post, only: %i[show edit update destroy]
+before_action :set_build_post, only: %i[show edit update destroy like_create like_destroy]
    before_action :authenticate_user!, except: :index
 
   def index
@@ -9,7 +9,7 @@ before_action :set_build_post, only: %i[show edit update destroy]
   end
 
   def show
-
+    @likes_count = Like.where(build_post_id: @build_post.id).count
   end
 
   def new
@@ -44,6 +44,20 @@ before_action :set_build_post, only: %i[show edit update destroy]
     redirect_to @build_post, alert: "削除しました"
   end
 
+  def like_create
+    @like = current_user.likes.new(build_post_id: params[:id])
+    if @like.save!
+      redirect_to @build_post
+    end
+  end
+
+  def like_destroy
+    @like = Like.find_by(build_post_id: params[:id]) 
+    if @like.destroy
+      redirect_to @build_post
+    end
+  end
+
   private
 
   def set_build_post
@@ -51,7 +65,7 @@ before_action :set_build_post, only: %i[show edit update destroy]
   end
 
   def build_post_params
-    params.require(:build_post).permit(:title, :content).merge(user_id: current_user.id)
+    params.require(:build_post).permit(:title, :content, :user_id, :like).merge(user_id: current_user.id)
   end
 
 end

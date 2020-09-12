@@ -1,5 +1,5 @@
 class ElectricPostsController < ApplicationController
-   before_action :set_electric_post, only: %i[show edit update destroy]
+   before_action :set_electric_post, only: %i[show edit update destroy like_create like_destroy]
    before_action :authenticate_user!, except: :index
 
   def index
@@ -45,16 +45,16 @@ class ElectricPostsController < ApplicationController
   end
 
   def like_create
-    @like = current_user.likes.new(user_id: current_user.id, electric_post_id: params[:electric_post_id])
+    @like = current_user.likes.new(electric_post_id: params[:id])
     if @like.save!
       redirect_to @electric_post
     end
   end
 
   def like_destroy
-    @like = Like.find_by(user_id: current_user.id, electric_post_id: params[:electric_post_id]) 
+    @like = Like.find_by(electric_post_id: params[:id]) 
     if @like.destroy
-      redirect_to @electric_post, alert: "削除しました"
+      redirect_to @electric_post
     end
   end
 
