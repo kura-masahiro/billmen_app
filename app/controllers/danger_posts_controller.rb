@@ -1,5 +1,5 @@
 class DangerPostsController < ApplicationController
-   before_action :set_danger_post, only: %i[show edit update destroy like_create like_destroy]
+   before_action :set_danger_post, only: %i[show edit update destroy like_create like_destroy comment_create comment_destroy]
    before_action :authenticate_user!, except: :index
 
   def index
@@ -62,6 +62,20 @@ class DangerPostsController < ApplicationController
     end
   end
 
+   def comment_create
+    @comment = current_user.comments.new(danger_post_id: params[:id], body: params[:body])
+    if @comment.save!
+      redirect_to @danger_post
+    end
+   end
+
+  def comment_destroy
+    @comment = Comment.find_by(danger_post_id: params[:id]) 
+      if @comment.destroy
+        redirect_to @danger_post
+      end
+  end
+
 
   private
 
@@ -70,7 +84,7 @@ class DangerPostsController < ApplicationController
   end
 
   def danger_post_params
-    params.require(:danger_post).permit(:title, :content, :user_id, :like).merge(user_id: current_user.id)
+    params.require(:danger_post).permit(:title, :content, :user_id, :like, :body, :comment).merge(user_id: current_user.id)
   end
 
 end

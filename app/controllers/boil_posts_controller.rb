@@ -1,5 +1,5 @@
 class BoilPostsController < ApplicationController
-  before_action :set_boil_post, only: %i[show edit update destroy like_create like_destroy]
+  before_action :set_boil_post, only: %i[show edit update destroy like_create like_destroy comment_create comment_destroy]
   before_action :authenticate_user!, except: :index
 
   def index
@@ -62,6 +62,20 @@ class BoilPostsController < ApplicationController
     end
   end
 
+   def comment_create
+    @comment = current_user.comments.new(boil_post_id: params[:id], body: params[:body])
+    if @comment.save!
+      redirect_to @boil_post
+    end
+  end
+
+  def comment_destroy
+    @comment = Comment.find_by(boil_post_id: params[:id]) 
+      if @comment.destroy
+        redirect_to @boil_post
+      end
+  end
+
   private
 
   def set_boil_post
@@ -69,7 +83,7 @@ class BoilPostsController < ApplicationController
   end
 
   def boil_post_params
-    params.require(:boil_post).permit(:title, :content, :user_id, :like).merge(user_id: current_user.id)
+    params.require(:boil_post).permit(:title, :content, :user_id, :like, :body, :comment).merge(user_id: current_user.id)
   end
 
 end
