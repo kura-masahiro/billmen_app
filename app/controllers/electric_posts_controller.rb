@@ -1,5 +1,5 @@
 class ElectricPostsController < ApplicationController
-   before_action :set_electric_post, only: %i[show edit update destroy like_create like_destroy]
+   before_action :set_electric_post, only: %i[show edit update destroy like_create like_destroy comment_create comment_destroy]
    before_action :authenticate_user!, except: :index
 
   def index
@@ -7,7 +7,7 @@ class ElectricPostsController < ApplicationController
     @results = @search.result if @search.present?
     @electric_posts = ElectricPost.order(id: :asc)
   end
-
+  
   def show
     @likes_count = Like.where(electric_post_id: @electric_post.id).count
   end
@@ -15,7 +15,7 @@ class ElectricPostsController < ApplicationController
   def new
     @electric_post = ElectricPost.new
   end
-
+  
   def create
     @electric_post = ElectricPost.new(electric_post_params)
     if @electric_post.save
@@ -62,6 +62,20 @@ class ElectricPostsController < ApplicationController
     end
   end
 
+  def comment_create
+    @comment = current_user.comments.new(electric_post_id: params[:id], body: params[:body])
+    if @comment.save!
+      redirect_to @electric_post
+    end
+  end
+
+  def comment_destroy
+    @comment = Comment.find_by(electric_post_id: params[:id]) 
+      if @comment.destroy
+        redirect_to @electric_post
+      end
+    end
+
   
   private
 
@@ -70,7 +84,7 @@ class ElectricPostsController < ApplicationController
   end
 
   def electric_post_params
-    params.require(:electric_post).permit(:title, :content, :user_id, :like).merge(user_id: current_user.id)
+    params.require(:electric_post).permit(:title, :content, :user_id, :like, :body, :comment).merge(user_id: current_user.id)
   end
 
 end

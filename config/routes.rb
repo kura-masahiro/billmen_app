@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     member do
       post :like_create
       delete :like_destroy
+      get :comment_create
+      post :comment_create
+      post :comment_destroy
     end
   end
 
@@ -12,6 +15,9 @@ Rails.application.routes.draw do
     member do
       post :like_create
       delete :like_destroy
+      get :comment_create
+      post :comment_create
+      post :comment_destroy
     end
   end
 
@@ -19,6 +25,9 @@ Rails.application.routes.draw do
     member do
       post :like_create
       delete :like_destroy
+      get :comment_create
+      post :comment_create
+      post :comment_destroy
     end
   end
 
@@ -26,6 +35,9 @@ Rails.application.routes.draw do
     member do
       post :like_create
       delete :like_destroy
+      get :comment_create
+      post :comment_create
+      post :comment_destroy
     end
   end
 
@@ -33,6 +45,9 @@ Rails.application.routes.draw do
     member do
       post :like_create
       delete :like_destroy
+      get :comment_create
+      post :comment_create
+      post :comment_destroy
     end
   end
   get 'pages/show'
