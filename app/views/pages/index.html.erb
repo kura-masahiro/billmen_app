@@ -1,9 +1,19 @@
-<div class="text-center p-4 mx-5">
- <h1>ようこそ</h1>
- <p>ビルメン共有アプリです！</p>
- <% if user_signed_in? %>
-    <strong><%= link_to "マイページへ", pages_show_path %></strong>
-  <% else %>
-    <%= link_to 'アカウント登録', new_user_registration_path %>
- <% end %>
+<%# <div class="text-center"> %>
+<div class="form-group row justify-content-center">
+  <div class="container">
+      <img style="width: 100%; height: auto;" src="/assets/build.jpg"></img>
+  </div>
+    <br>
+  <div class="btn-toolbar p-5">
+     <div class="btn-group btn-group-lg mx-5"> 
+      <% if user_signed_in? %>
+          <%= link_to "マイページへ", pages_show_path, class: "btn outline btn-primary" %>
+      <% else %>
+          <%= link_to 'アカウント登録', new_user_registration_path, class: "btn outline btn-primary" %>
+      <% end %>
+    </div>
+    <div class="btn-group btn-group-lg mx-5"> 
+      <%= link_to 'アカウント登録', new_user_registration_path, class: "btn outline btn-primary" %>
+    </div>
+  </div>
 </div>
