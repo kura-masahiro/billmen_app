@@ -13,4 +13,11 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable
          
    mount_uploader :image, ImageUploader
+   def self.guest
+   find_or_create_by!(username: 'ゲストユーザー',  email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.confirmed_at = Time.now 
+    end
+  end
+
 end
