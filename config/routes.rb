@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+     passwords: 'users/passwords'
+  }
+  devise_scope :user do
+    post '/pages/guest_sign_in', to: 'users/sessions#new_guest'
+  end
   root 'pages#index'
   resources :electric_posts do
     member do
