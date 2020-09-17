@@ -51,6 +51,12 @@
 ---
 ## インストール
 
+```
+$ git clone https://github.com/kura-masahiro/billmen_app.git
+$ cd billmen_app
+$ bundle install
+```
+
 ---
 ## 作者
 大倉　宏勝  
