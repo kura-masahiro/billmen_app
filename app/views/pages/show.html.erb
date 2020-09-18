@@ -1,5 +1,9 @@
 <div class="text-center p-5">
 <h1><br /><%= current_user.username %>さんのアカウント</h1><br />
-<img src=<%= current_user.image %> class = "icon_image">
+<% if current_user.image? %>
+<img src=<%= current_user.image %> class = "icon_image" alt="ユーザーアイコン">
+<% else %>
+  <image src="/assets/build.jpg" class="icon_image" alt="ユーザーアイコン" %>
+<% end %>
 <h3><br />ユーザー様用のページです。</h3>
 </div>
