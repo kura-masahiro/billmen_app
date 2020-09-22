@@ -64,8 +64,10 @@ class BoilPostsController < ApplicationController
 
    def comment_create
     @comment = current_user.comments.new(boil_post_id: params[:id], body: params[:body])
-    if @comment.save!
+    if @comment.save
       redirect_to @boil_post
+    else
+      render :show
     end
   end
 
