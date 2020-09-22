@@ -23,8 +23,8 @@
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :password %> <i>(変更しない場合は空白のままにして下さい)</i><br />
+    <div class="field" style="color:blue">
+      <%= f.label :password, "新しいパスワード" %> <i>(変更しない場合は空白のままにして下さい)</i><br />
       <%= f.password_field :password, autocomplete: "new-password" %>
       <% if @minimum_password_length %>
         <br />
@@ -32,7 +32,7 @@
       <% end %>
     </div>
 
-    <div class="field">
+    <div class="field" style="color:blue">
       <%= f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "パスワード更新" %>
+      <%= f.submit "更新" %>
     </div>
 
   <% end %>
