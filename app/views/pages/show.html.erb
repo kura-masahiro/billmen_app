@@ -5,5 +5,26 @@
 <% else %>
   <image src="/assets/build.jpg" class="icon_image" alt="ユーザーアイコン" %>
 <% end %>
-<h3><br />ユーザー様用のページです。</h3>
+<h3><br />ユーザー様用のページです。</h3><br>
+<h2>自分の投稿一覧</h2>
+ <% current_user.electric_posts.each do |electric_post| %>
+ <p>件名：<%= electric_post.title %></p>
+ <p>内容： <%= simple_format(electric_post.content) %></p>
+<% end %>
+ <% current_user.boil_posts.each do |boil_post| %>
+ <p>件名：<%= boil_post.title %></p>
+ <p>内容： <%= simple_format(boil_post.content) %></p>
+<% end %>
+ <% current_user.freeze_posts.each do |freeze_post| %>
+ <p>件名：<%= freeze_post.title %></p>
+ <p>内容： <%= simple_format(freeze_post.content) %></p>
+<% end %>
+ <% current_user.danger_posts.each do |danger_post| %>
+ <p>件名：<%= danger_post.title %></p>
+ <p>内容： <%= simple_format(danger_post.content) %></p>
+<% end %>
+ <% current_user.build_posts.each do |build_post| %>
+ <p>件名：<%= build_post.title %></p>
+ <p>内容： <%= simple_format(build_post.content) %></p>
+<% end %>
 </div>
